@@ -395,10 +395,11 @@
   "tests": {
     "twig.UnionGrid": [
       "src/twig/UnionGrid/test/merge.test.cpp",
-      "src/twig/UnionGrid/test/UnionGrid.test.cpp"
+      "src/twig/UnionGrid/test/UnionGrid.test.cpp",
+      "src/twig/UnionGrid/test/unique.test.cpp"
     ],
     "twig.linearize": [
-      "src/twig/linearize/test/linearize.test.cpp",
+      "src/twig/linearize/test/histogram.test.cpp",
       "src/twig/linearize/test/linearLinear.test.cpp"
     ],
     "twig.linearize.Callable": [
