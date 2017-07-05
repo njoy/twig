@@ -23,11 +23,15 @@ SCENARIO("Broken stick implementation"){
     auto difference = std::abs( trial - reference );
     return ( difference < 1E-10 ) || ( (difference / reference) < 1E-4 );
   };
-
+  
+  auto midpoint = []( auto&& x, auto&& ){
+    return 0.5 * ( std::get<0>(x) + std::get<1>(x) );
+  };
+  
   auto linearization = linearize::callable< double >( instance );
   auto first = xgrid.begin();
   auto last = xgrid.end() - 1;
-  linearization( first, last, functor, criterion );
+  linearization( first, last, functor, criterion, midpoint );
   REQUIRE( first == last );
 
   

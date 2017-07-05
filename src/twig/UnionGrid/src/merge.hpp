@@ -16,7 +16,7 @@ static auto merge( Grids&& grids ){
   std::partial_sum( nodeCount.begin(), nodeCount.end(), nodeCount.begin() );
 
   std::vector<Value> grid( nodeCount.back() );
-  std::vector<Value> buffer( std::max( int( grid.size() / 100 ), 32 ) );
+  std::vector<Value> buffer; buffer.reserve( grid.size() );
     
   auto divide_and_conquer =
     [&]( const auto& self, std::size_t left, std::size_t right, auto base ){
@@ -35,7 +35,9 @@ static auto merge( Grids&& grids ){
 					    split ) - nodeCount.begin();
       const auto mid = self( self, left, offset, base );
       const auto end = self( self, offset, right, mid );
-      std::inplace_merge( base, mid, end );
+      buffer.clear();
+      std::merge( base, mid, mid, end, std::back_inserter(buffer) );
+      std::copy( buffer.begin(), buffer.end(), base );
       return end;
     }
     }
