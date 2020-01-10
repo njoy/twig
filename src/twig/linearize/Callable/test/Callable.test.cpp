@@ -16,27 +16,27 @@ SCENARIO("Broken stick implementation"){
 
   auto functor = []( auto&& x ){ return std::exp(x); };
   auto criterion = []( auto&& trial, auto&& reference,
-		       auto&& xLeft, auto&& xRight,
-		       auto&&, auto&& ){
+                       auto&& xLeft, auto&& xRight,
+                       auto&&,       auto&& ){
     const auto infinity = std::numeric_limits<double>::infinity();
     if ( xRight == std::nextafter( xLeft, infinity ) ){ return true; }
     auto difference = std::abs( trial - reference );
     return ( difference < 1E-10 ) || ( (difference / reference) < 1E-4 );
   };
-  
+
   auto midpoint = []( auto&& x, auto&& ){
     return 0.5 * ( std::get<0>(x) + std::get<1>(x) );
   };
-  
+
   auto linearization = linearize::callable< double >( instance );
   auto first = xgrid.begin();
   auto last = xgrid.end() - 1;
   linearization( first, last, functor, criterion, midpoint );
-  REQUIRE( first == last );
+  CHECK( first == last );
 
-  
+
   auto iterator = instance.begin();
-  
+
   auto left = [&iterator](){ return iterator[0]; };
   auto right = [&iterator](){ return iterator[1]; };
 
@@ -47,9 +47,9 @@ SCENARIO("Broken stick implementation"){
     const auto midpoint = 0.5 * ( x( left() ) + x( right() ) );
     const auto trial = 0.5 * ( y( left() ) + y( right() ) );
     const auto reference = y( midpoint );
-    REQUIRE( criterion( trial, reference,
-			x( left() ), x( right() ),
-			y( left() ), y( right() ) ) );
+    CHECK( criterion( trial, reference,
+                       x( left() ), x( right() ),
+                       y( left() ), y( right() ) ) );
     ++iterator;
   }
 }  

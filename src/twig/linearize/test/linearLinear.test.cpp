@@ -13,8 +13,8 @@ SCENARIO("linearizing an existing linear-linear region"){
 
   auto first = input.begin();
   linearize::linearLinear( first, input.end() - 1, sink );
-  REQUIRE( first == (input.end() - 1) );
+  CHECK( first == (input.end() - 1) );
 
   std::vector< double > reference{ 1.0, 2.0 };
-  REQUIRE( sink == reference );
+  CHECK( sink == reference );
 }

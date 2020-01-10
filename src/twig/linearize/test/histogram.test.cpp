@@ -14,13 +14,13 @@ SCENARIO("linearizing a histogram region"){
 
   auto first = fine.begin();
   linearize::histogram( first, fine.end() - 1,  histogram.begin(), sink );
-  REQUIRE( first == (fine.end() - 1) );
+  CHECK( first == (fine.end() - 1) );
   
   std::vector< double > reference{ 1.0, 2.0,
                                    std::nextafter( 3.0, ninfinity ),
                                    3.0, 4.0, 5.0,
                                    std::nextafter( 6.0, ninfinity ) };
-  REQUIRE( sink == reference );
+  CHECK( sink == reference );
 }
 
 SCENARIO("linearizing a histogram region with sink with nudge collision"){
@@ -30,12 +30,12 @@ SCENARIO("linearizing a histogram region with sink with nudge collision"){
 
   auto first = fine.begin();
   linearize::histogram( first, fine.end() - 1,  histogram.begin(), sink );
-  REQUIRE( first == (fine.end() - 1) );
+  CHECK( first == (fine.end() - 1) );
   
   std::vector< double > reference{ std::nextafter( 1.0, ninfinity ),
                                    1.0, 2.0,
                                    std::nextafter( 3.0, ninfinity ),
                                    3.0, 4.0, 5.0,
                                    std::nextafter( 6.0, ninfinity ) };
-  REQUIRE( sink == reference );
+  CHECK( sink == reference );
 }
