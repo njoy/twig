@@ -10,9 +10,9 @@ template< typename ForwardIterator,
 	  typename Convergence,
           typename Midpoint >
 void grid( ForwardIterator& first,
-	   ForwardIterator last,
-	   Functor&& functor,
-	   Convergence&& criterion,
+				   ForwardIterator last,
+				   Functor&& functor,
+				   Convergence&& criterion,
            Midpoint&& midpoint ){
   auto xLeft = *first; ++first;
   auto yLeft = functor( xLeft );
@@ -20,8 +20,8 @@ void grid( ForwardIterator& first,
     auto xRight = *first; ++first;
     auto yRight = functor( xRight );
     this->bin( xLeft, xRight, yLeft, yRight,
-	       std::forward<Functor>(functor),
-	       std::forward<Convergence>(criterion),
+               std::forward<Functor>(functor),
+               std::forward<Convergence>(criterion),
                std::forward<Midpoint>(midpoint) );
     xLeft = xRight;
     yLeft = yRight;

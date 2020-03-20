@@ -21,7 +21,7 @@ SCENARIO("Broken stick implementation"){
     const auto infinity = std::numeric_limits<double>::infinity();
     if ( xRight == std::nextafter( xLeft, infinity ) ){ return true; }
     auto difference = std::abs( trial - reference );
-    return ( difference < 1E-10 ) || ( (difference / reference) < 1E-4 );
+    return ( difference < 1E-10 ) || ( (difference / reference) < 1E-1 );
   };
 
   auto midpoint = []( auto&& x, auto&& ){
@@ -30,11 +30,16 @@ SCENARIO("Broken stick implementation"){
 
   auto linearization = linearize::callable< double >( instance );
   auto first = xgrid.begin();
-  auto last = xgrid.end() - 1;
+  auto last = xgrid.end();
   linearization( first, last, functor, criterion, midpoint );
   CHECK( first == last );
 
-
+  // Make sure all the original x values are in the linearized x
+  for( double& x : xgrid ){
+    CHECK( std::any_of( instance.begin(), instance.end(), 
+                        [&]( auto& arg ){ return arg == x; } ) );
+  }
+  
   auto iterator = instance.begin();
 
   auto left = [&iterator](){ return iterator[0]; };
