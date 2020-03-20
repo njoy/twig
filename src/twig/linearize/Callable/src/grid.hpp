@@ -6,13 +6,13 @@
  * x-range argument.
  **/
 template< typename ForwardIterator,
-	  typename Functor,
-	  typename Convergence,
+    typename Functor,
+    typename Convergence,
           typename Midpoint >
 void grid( ForwardIterator& first,
-				   ForwardIterator last,
-				   Functor&& functor,
-				   Convergence&& criterion,
+           ForwardIterator last,
+           Functor&& functor,
+           Convergence&& criterion,
            Midpoint&& midpoint ){
   auto xLeft = *first; ++first;
   auto yLeft = functor( xLeft );
