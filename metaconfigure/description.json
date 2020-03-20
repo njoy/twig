@@ -606,7 +606,7 @@
   "is external project": false,
   "language": "c++",
   "name": "twig",
-  "standard": "c++14",
+  "standard": "c++17",
   "standards": [
     "c++98",
     "c++11",
