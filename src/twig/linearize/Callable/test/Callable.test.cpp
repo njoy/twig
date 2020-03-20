@@ -21,7 +21,7 @@ SCENARIO("Broken stick implementation"){
     const auto infinity = std::numeric_limits<double>::infinity();
     if ( xRight == std::nextafter( xLeft, infinity ) ){ return true; }
     auto difference = std::abs( trial - reference );
-    return ( difference < 1E-10 ) || ( (difference / reference) < 1E-1 );
+    return ( difference < 1E-10 ) || ( (difference / reference) < 1E-4 );
   };
 
   auto midpoint = []( auto&& x, auto&& ){
