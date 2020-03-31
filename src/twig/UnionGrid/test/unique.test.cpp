@@ -30,5 +30,5 @@ SCENARIO("UnionGrid unique"){
                                  std::nextafter(1.5, -10.0),
                                  1.5, 2.0 };
   
-  REQUIRE( reference == result );
+  CHECK( reference == result );
 }

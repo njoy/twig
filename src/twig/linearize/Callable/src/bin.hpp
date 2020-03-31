@@ -1,7 +1,7 @@
 template< typename Functor, typename Criterion, typename Midpoint >
 void bin( Xdata xLeft, Xdata xRight,
-	  Ydata yLeft, Ydata yRight,
-	  Functor&& functor,
+          Ydata yLeft, Ydata yRight,
+          Functor&& functor,
           Criterion&& criterion,
           Midpoint&& midpoint ){
   auto left = 0; auto right = 1;
@@ -12,10 +12,15 @@ void bin( Xdata xLeft, Xdata xRight,
     const auto trial = 0.5 * ( y[left] + y[right] );
     const auto reference = functor( midpoint_ );
     if ( criterion( trial, reference,
-		    x[left], x[right],
-		    y[left], y[right] ) ){
+        x[left], x[right],
+        y[left], y[right] ) ){
+
       this->stack->push_back( x[left] );
-      if ( not this->xBuffer.size() ){ break; }
+      if ( not this->xBuffer.size() ){ 
+        this->stack->push_back( x[right] );
+        break; 
+      }
+
       std::swap( left, right );
       x[right] = this->xBuffer.back(); this->xBuffer.pop_back();
       y[right] = this->yBuffer.back(); this->yBuffer.pop_back();
