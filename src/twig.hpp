@@ -6,6 +6,7 @@
 #include <numeric>
 #include <vector>
 #include <iostream>
+#include <memory>
   
 namespace njoy {
 namespace twig {
