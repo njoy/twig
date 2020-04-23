@@ -6,8 +6,6 @@ class Callable {
 public:
   Xstack* xStack_;
   Ystack* yStack_;
-  // std::unique_ptr< Xstack > xStack_;
-  // std::unique_ptr< Ystack > yStack_;
   std::vector< Xdata > xBuffer{};
   std::vector< Ydata > yBuffer{};
 
