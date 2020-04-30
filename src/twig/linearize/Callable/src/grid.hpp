@@ -10,7 +10,7 @@ template< typename ForwardIterator,
           typename Convergence,
           typename Midpoint >
 void grid( ForwardIterator& first,
-           ForwardIterator& last,
+           ForwardIterator last,
            Functor&& functor,
            Convergence&& criterion,
            Midpoint&& midpoint ){
