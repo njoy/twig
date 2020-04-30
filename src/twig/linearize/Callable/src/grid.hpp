@@ -17,8 +17,8 @@ void grid( ForwardIterator& first,
   auto xLeft = *first; ++first;
   auto yLeft = functor( xLeft );
 
-  decltype( xLeft ) xRight;
-  decltype( yLeft ) yRight;
+  auto xRight = xLeft;
+  auto yRight = yLeft;
   while ( first != last ){
     xRight = *first; ++first;
     yRight = functor( xRight );
