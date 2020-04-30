@@ -18,8 +18,8 @@ void bin( Xdata xLeft, Xdata xRight,
       this->xStack_->push_back( x[left] );
       this->yStack_->push_back( y[left] );
       if ( not this->xBuffer.size() ){ 
-        // this->xStack_->push_back( x[right] );
-        // this->yStack_->push_back( y[right] );
+        this->xStack_->push_back( x[right] );
+        this->yStack_->push_back( y[right] );
         break; 
       }
 

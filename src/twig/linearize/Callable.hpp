@@ -3,7 +3,6 @@ class Callable {
   using Xdata = typename Xstack::value_type;
   using Ydata = typename Ystack::value_type;
 
-public:
   Xstack* xStack_;
   Ystack* yStack_;
   std::vector< Xdata > xBuffer{};

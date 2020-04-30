@@ -49,18 +49,7 @@ SCENARIO("Broken stick implementation"){
                         [&]( auto& arg ){ return arg == x; } ) );
   }
   
-  auto iterator = xInstance.begin();
-
-  auto left = [&iterator](){ return iterator[0]; };
-  auto right = [&iterator](){ return iterator[1]; };
-
-  auto x = []( auto value ){ return value; };
-  auto y = [&]( auto value ){ return functor( value ); };
-
-
   auto length = xInstance.size();
-  std::cout << "xlength: " << xInstance.size() << std::endl;
-  std::cout << "ylength: " << yInstance.size() << std::endl;
   for (size_t i{ 0 }; i < length; ++i) {
     CHECK( yInstance[ i ] == functor( xInstance[ i ] ) );
   }

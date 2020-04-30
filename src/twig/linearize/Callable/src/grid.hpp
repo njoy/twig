@@ -29,6 +29,4 @@ void grid( ForwardIterator& first,
     xLeft = xRight;
     yLeft = yRight;
   }
-  this->xStack_->push_back( xRight );
-  this->yStack_->push_back( yRight );
 }
