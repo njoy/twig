@@ -17,9 +17,6 @@ Callable( Xstack& xStack, Ystack& yStack ) :
   yStack_( &yStack )
 {}
 
-  void xStack( Xstack& stack ){ this->xStack_ = &stack; }
-  void yStack( Ystack& stack ){ this->yStack_ = &stack; }
-
   template< typename... Args >
   void operator()( Args&&... args ){
     this->grid( std::forward<Args>(args)... );  
