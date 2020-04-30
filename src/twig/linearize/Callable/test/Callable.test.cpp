@@ -8,13 +8,6 @@
 
 using namespace njoy::twig;
 
-void printv( const std::vector< double >& v, std::string name ){
-  std::cout << name << ": ";
-  for( auto x: v ){
-    std::cout << x << ", ";
-  }
-  std::cout << std::endl;
-}
 SCENARIO("Broken stick implementation"){
   std::vector< double > xInstance;
   std::vector< double > yInstance;
@@ -50,6 +43,7 @@ SCENARIO("Broken stick implementation"){
   }
   
   auto length = xInstance.size();
+  CHECK( 1793 == length );
   for (size_t i{ 0 }; i < length; ++i) {
     CHECK( yInstance[ i ] == functor( xInstance[ i ] ) );
   }

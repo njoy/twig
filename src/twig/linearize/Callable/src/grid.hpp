@@ -10,7 +10,7 @@ template< typename ForwardIterator,
           typename Convergence,
           typename Midpoint >
 void grid( ForwardIterator& first,
-           ForwardIterator last,
+           ForwardIterator& last,
            Functor&& functor,
            Convergence&& criterion,
            Midpoint&& midpoint ){
@@ -29,4 +29,6 @@ void grid( ForwardIterator& first,
     xLeft = xRight;
     yLeft = yRight;
   }
+  this->xStack_->push_back( xRight );
+  this->yStack_->push_back( yRight );
 }
