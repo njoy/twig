@@ -44,6 +44,7 @@ SCENARIO("Broken stick implementation"){
   
   auto length = xInstance.size();
   CHECK( 1793 == length );
+  CHECK( 1793 == yInstance.size() );
   for (size_t i{ 0 }; i < length; ++i) {
     CHECK( yInstance[ i ] == functor( xInstance[ i ] ) );
   }
