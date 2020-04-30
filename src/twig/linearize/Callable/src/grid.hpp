@@ -6,8 +6,8 @@
  * x-range argument.
  **/
 template< typename ForwardIterator,
-    typename Functor,
-    typename Convergence,
+          typename Functor,
+          typename Convergence,
           typename Midpoint >
 void grid( ForwardIterator& first,
            ForwardIterator last,
@@ -16,9 +16,12 @@ void grid( ForwardIterator& first,
            Midpoint&& midpoint ){
   auto xLeft = *first; ++first;
   auto yLeft = functor( xLeft );
+
+  auto xRight = xLeft;
+  auto yRight = yLeft;
   while ( first != last ){
-    auto xRight = *first; ++first;
-    auto yRight = functor( xRight );
+    xRight = *first; ++first;
+    yRight = functor( xRight );
     this->bin( xLeft, xRight, yLeft, yRight,
                std::forward<Functor>(functor),
                std::forward<Convergence>(criterion),
@@ -26,4 +29,6 @@ void grid( ForwardIterator& first,
     xLeft = xRight;
     yLeft = yRight;
   }
+  this->xStack_->push_back( xRight );
+  this->yStack_->push_back( yRight );
 }

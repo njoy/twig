@@ -15,9 +15,9 @@ void bin( Xdata xLeft, Xdata xRight,
         x[left], x[right],
         y[left], y[right] ) ){
 
-      this->stack->push_back( x[left] );
+      this->xStack_->push_back( x[left] );
+      this->yStack_->push_back( y[left] );
       if ( not this->xBuffer.size() ){ 
-        this->stack->push_back( x[right] );
         break; 
       }
 

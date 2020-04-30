@@ -9,8 +9,10 @@
 using namespace njoy::twig;
 
 SCENARIO("Broken stick implementation"){
-  std::vector< double > instance;
-  instance.reserve(100);
+  std::vector< double > xInstance;
+  std::vector< double > yInstance;
+  xInstance.reserve(100);
+  yInstance.reserve(100);
 
   std::vector< double > xgrid{ 1.0, 5.0, 13.0, 29.0 };
 
@@ -28,7 +30,7 @@ SCENARIO("Broken stick implementation"){
     return 0.5 * ( std::get<0>(x) + std::get<1>(x) );
   };
 
-  auto linearization = linearize::callable< double >( instance );
+  auto linearization = linearize::callable( xInstance, yInstance );
   auto first = xgrid.begin();
   auto last = xgrid.end();
   linearization( first, last, functor, criterion, midpoint );
@@ -36,25 +38,14 @@ SCENARIO("Broken stick implementation"){
 
   // Make sure all the original x values are in the linearized x
   for( double& x : xgrid ){
-    CHECK( std::any_of( instance.begin(), instance.end(), 
+    CHECK( std::any_of( xInstance.begin(), xInstance.end(), 
                         [&]( auto& arg ){ return arg == x; } ) );
   }
   
-  auto iterator = instance.begin();
-
-  auto left = [&iterator](){ return iterator[0]; };
-  auto right = [&iterator](){ return iterator[1]; };
-
-  auto x = []( auto value ){ return value; };
-  auto y = [&]( auto value ){ return functor( value ); };
-
-  while ( iterator != std::prev( instance.end() ) ){
-    const auto midpoint = 0.5 * ( x( left() ) + x( right() ) );
-    const auto trial = 0.5 * ( y( left() ) + y( right() ) );
-    const auto reference = y( midpoint );
-    CHECK( criterion( trial, reference,
-                       x( left() ), x( right() ),
-                       y( left() ), y( right() ) ) );
-    ++iterator;
+  auto length = xInstance.size();
+  CHECK( 1793 == length );
+  CHECK( 1793 == yInstance.size() );
+  for (size_t i{ 0 }; i < length; ++i) {
+    CHECK( yInstance[ i ] == functor( xInstance[ i ] ) );
   }
 }  

@@ -1,8 +1,10 @@
-template< typename Xstack, typename Ydata >
+template< typename Xstack, typename Ystack >
 class Callable {
   using Xdata = typename Xstack::value_type;
+  using Ydata = typename Ystack::value_type;
 
-  Xstack* stack;
+  Xstack* xStack_;
+  Ystack* yStack_;
   std::vector< Xdata > xBuffer{};
   std::vector< Ydata > yBuffer{};
 
@@ -10,8 +12,10 @@ class Callable {
   #include "twig/linearize/Callable/src/grid.hpp"
 
 public:
-  Callable( Xstack& xStack ) : stack( &xStack ){}
-  void xStack( Xstack& stack ){ this->stack = &stack; }
+Callable( Xstack& xStack, Ystack& yStack ) : 
+  xStack_( &xStack ),
+  yStack_( &yStack )
+{}
 
   template< typename... Args >
   void operator()( Args&&... args ){
@@ -19,7 +23,7 @@ public:
   }
 };
 
-template< typename Ydata, typename Xstack >
-auto callable( Xstack& stack ){
-  return Callable< Xstack, Ydata >( stack );
+template< typename Ystack, typename Xstack >
+auto callable( Xstack& xStack, Ystack& yStack ){
+  return Callable( xStack, yStack );
 }
