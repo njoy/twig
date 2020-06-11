@@ -1,22 +1,25 @@
-########################################################################
-# Preamble
-########################################################################
+include( FetchContent )
 
-cmake_minimum_required( VERSION 3.16 )
-project( twig LANGUAGES CXX )
 
 ########################################################################
-# Dependencies
+# Forward declarations
 ########################################################################
 
-include( cmake/twig_dependencies.cmake )
 
 ########################################################################
-# Project targets
+# Declare project dependencies
 ########################################################################
 
-add_library( twig INTERFACE )
-target_include_directories( twig INTERFACE src/ )
-target_link_libraries( twig
-    INTERFACE catch-adapter
+FetchContent_Declare( catch-adapter
+    GIT_REPOSITORY  http://github.com/njoy/catch-adapter
+    GIT_TAG         origin/build/fetchcontent
+    )
+
+
+########################################################################
+# Load dependencies
+########################################################################
+
+FetchContent_MakeAvailable(
+    catch-adapter
     )
