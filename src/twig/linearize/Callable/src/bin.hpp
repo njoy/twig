@@ -8,10 +8,9 @@ void bin( Xdata xLeft, Xdata xRight,
   std::array< Xdata, 2 > x{{ xLeft, xRight }};
   std::array< Ydata, 2 > y{{ yLeft, yRight }};
   while (true) {
-    const auto midpoint_ = midpoint( x, y );
-    const auto trial = 0.5 * ( y[left] + y[right] );
-    const auto reference = functor( midpoint_ );
-    if ( criterion( trial, reference,
+    const auto& [ mx, my ] = midpoint( x, y );
+    const auto reference = functor( mx );
+    if ( criterion( my, reference,
         x[left], x[right],
         y[left], y[right] ) ){
 
@@ -27,7 +26,7 @@ void bin( Xdata xLeft, Xdata xRight,
     } else {
       this->xBuffer.push_back( x[right] );
       this->yBuffer.push_back( y[right] );
-      x[right] = midpoint_;
+      x[right] = mx;
       y[right] = reference;
     }
   }
