@@ -26,8 +26,11 @@ SCENARIO("Broken stick implementation"){
     return ( difference < 1E-10 ) || ( (difference / reference) < 1E-4 );
   };
 
-  auto midpoint = []( auto&& x, auto&& ){
-    return 0.5 * ( std::get<0>(x) + std::get<1>(x) );
+  auto midpoint = []( auto&& x, auto&& y ){
+
+    auto mx =  0.5 * ( std::get<0>(x) + std::get<1>(x) );
+    auto my =  0.5 * ( std::get<0>(y) + std::get<1>(y) );
+    return std::make_pair( mx, my );
   };
 
   auto linearization = linearize::callable( xInstance, yInstance );
